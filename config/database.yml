@@ -28,6 +28,10 @@ default: &default
 development:
   <<: *default
   database: rails_7_2_development
+  host: localhost
+  username: postgres
+  password: postgres
+  port: 15432
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
