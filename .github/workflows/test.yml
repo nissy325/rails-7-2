@@ -28,5 +28,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: prepare database
+        run: |
+          bundle exec rake parallel:setup
+
       - name: execute rspec
-        run: bundle exec rspec
+        run: bundle exec parallel_rspec

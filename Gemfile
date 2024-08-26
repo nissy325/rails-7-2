@@ -45,6 +45,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "rspec-rails"
+  gem "parallel_tests"
 end
 
 group :test do
