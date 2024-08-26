@@ -1,0 +1,36 @@
+name: CI
+
+on: push
+
+env:
+  RAILS_ENV: test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16.4
+        ports:
+          - 15432:5432
+        env:
+          POSTGRES_USER: 'postgres'
+          POSTGRES_PASSWORD: 'postgres'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: prepare database
+        run: |
+          bundle exec rake parallel:setup
+
+      - name: execute rspec
+        run: bundle exec parallel_rspec
